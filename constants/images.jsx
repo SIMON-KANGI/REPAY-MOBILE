@@ -4,4 +4,10 @@ import transfer from '../assets/Money-Transfer.png'
 import pay from '../assets/pay.png'
 import withdraw from '../assets/withdraw.png'
 import profile from '../assets/profile.jpeg'
-export default {bank, free, transfer,pay, withdraw, profile}
+import card from '../assets/card.jpg'
+import online from '../assets/online.jpg'
+import manage from '../assets/manage.jpg'
+import invoice from '../assets/invoice.jpeg'
+import shop from '../assets/shop.jpg'
+import repay_card from '../assets/repay-card.jpg'
+export default {bank, free, transfer,pay, withdraw, profile,card, online, manage, invoice, shop,  repay_card}
