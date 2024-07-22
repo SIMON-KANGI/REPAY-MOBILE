@@ -46,13 +46,27 @@ const TabLayout = () => (
     />
     
     <Tabs.Screen
-      name="about"
+      name="dashboard"
       options={{
-        title: 'About',
+        title: 'Dashboard',
         tabBarIcon: ({ color, focused }) => (
           <TabIcon
             icon={<MaterialIcons name="dashboard" size={24} color={color} />}
-            name="About"
+            name="Dashboard"
+            color={color}
+            focused={focused}
+          />
+        ),
+      }}
+    />
+      <Tabs.Screen
+      name="inbox"
+      options={{
+        title: 'Inbox',
+        tabBarIcon: ({ color, focused }) => (
+          <TabIcon
+            icon={<MaterialIcons name="inbox" size={24} color={color} />}
+            name="Inbox"
             color={color}
             focused={focused}
           />
