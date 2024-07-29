@@ -1,24 +1,34 @@
-import { View, Text,TextInput  } from 'react-native'
-import React from 'react'
+import { View, Text, TextInput } from 'react-native';
+import React from 'react';
 
-const FormField = ({title, value, handleChangeText, placeholder, formStyles}) => {
+const FormField = ({ title, value, handleChangeText, placeholder, formStyles = {} }) => {
   return (
-    <View>
-      <Text className='text-xl font-rbold mx-3'>{title}</Text>
-      <View>
+    <View style={formStyles.container || { marginBottom: 15 }}>
+      <Text style={[{ fontSize: 20, fontWeight: '500', marginHorizontal: 12 }, formStyles.label]}>
+        {title}
+      </Text>
+      <View style={formStyles.inputContainer || { marginTop: 5 }}>
         <TextInput
-        className='flex-1 text-white p-4 border-2 mx-3 font-semibold text-base'
-            style={formStyles.input}
-            onChangeText={handleChangeText}
-            value={value}
-            placeholder={placeholder}
-  
+          style={[
+            {
+              borderRadius: 10,
+              borderWidth: 1,
+              borderColor: 'black',
+              paddingHorizontal: 10,
+              paddingVertical: 8,
+              fontSize: 16,
+            },
+            formStyles.input,
+          ]}
+          onChangeText={handleChangeText}
+          value={value}
+          placeholder={placeholder}
+          placeholderTextColor={formStyles.placeholderColor || '#888'}
+          autoCapitalize="none" // Example of an additional prop
         />
-
-        
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default FormField
+export default FormField;
