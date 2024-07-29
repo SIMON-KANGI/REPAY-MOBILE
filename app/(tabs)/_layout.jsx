@@ -1,12 +1,12 @@
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
 
 const TabIcon = ({ icon, focused, name, color }) => (
-  <View className="items-center">
+  <View style={styles.iconContainer}>
     {icon}
-    <Text className={`${focused ? 'font-rbold' : 'font-rregular'} text-xs`} style={{ color }}>
+    <Text style={[styles.iconLabel, { color }, focused && styles.focusedLabel]}>
       {name}
     </Text>
   </View>
@@ -17,9 +17,9 @@ const tabBarOptions = {
   headerShown: false,
   tabBarStyle: {
     backgroundColor: '#161622',
-    alignItems: 'center',
     height: 84,
     justifyContent: 'space-around',
+    alignItems: 'center',
   },
   tabBarInactiveTintColor: '#FFE441',
   tabBarActiveTintColor: '#FFA001',
@@ -59,7 +59,8 @@ const TabLayout = () => (
         ),
       }}
     />
-      <Tabs.Screen
+    
+    <Tabs.Screen
       name="inbox"
       options={{
         title: 'Inbox',
@@ -73,6 +74,7 @@ const TabLayout = () => (
         ),
       }}
     />
+    
     <Tabs.Screen
       name="profile"
       options={{
@@ -89,5 +91,18 @@ const TabLayout = () => (
     />
   </Tabs>
 );
+
+const styles = StyleSheet.create({
+  iconContainer: {
+    alignItems: 'center',
+  },
+  iconLabel: {
+    fontSize: 12,
+    fontWeight: '400',
+  },
+  focusedLabel: {
+    fontWeight: '700',
+  },
+});
 
 export default TabLayout;
