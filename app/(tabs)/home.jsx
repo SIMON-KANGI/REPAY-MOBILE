@@ -1,22 +1,33 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { View, Text, ScrollView, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import { StatusBar } from 'expo-status-bar';
 import { useSelector } from 'react-redux';
 import images from '../../constants/images';
-import Card from '../../components/Cards';
+import Card from '../../components/Cards'
 import CalculateBalance from '../../components/CalculateBalance';
 import { selectCurrentUser } from '../../features/auth/authSlice';
+import ModalView from '../../components/modal';
 
 const Home = () => {
   const user = useSelector(selectCurrentUser);
-
+  const [modalVisible, setModalVisible] = useState(false);
+const icons=[
+  { icon: images.pay, color: '#f43f5e', text: 'Pay' },
+  { icon: <MaterialIcons name="arrow-outward" size={32} color="white" />, color: '#0ea5e9', text: 'Send' },
+  { icon: images.withdraw, color: '#10b981', text: 'Withdraw' },
+  { icon: <FontAwesome5 name="file-invoice-dollar" size={24} color="white" />, color: '#540d6e', text: 'Invoice' },
+]
   return (
     <SafeAreaView style={styles.safeAreaView}>
+    <ModalView
+      visible={modalVisible}
+      onDismiss={()=>setModalVisible(false)}
+    />
       <StatusBar backgroundColor='#f2e9e4' />
       <View>
-        <Text style={styles.welcomeText}>Welcome {user?.username}</Text>
+        <Text style={styles.welcomeText}>Welcome <Text>{user?.username}</Text></Text>
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContainer}>
         <View style={styles.profileContainer}>
@@ -31,15 +42,15 @@ const Home = () => {
         <View style={styles.mainContent}>
           <View style={styles.walletContainer}>
             <Text style={styles.walletTitle}>My Wallet:</Text>
-            <Text style={styles.walletAmount}><CalculateBalance /> KES</Text>
+            {/* Ensure that CalculateBalance is properly rendering text */}
+            <View
+              style={{display:"flex-row"}}>
+               <CalculateBalance />
+               <Text style={styles.walletAmount}> KES</Text>
+            </View>
           </View>
           <View style={styles.actionsContainer}>
-            {[
-              { icon: images.pay, color: '#f43f5e', text: 'Pay' },
-              { icon: <MaterialIcons name="arrow-outward" size={32} color="white" />, color: '#0ea5e9', text: 'Send' },
-              { icon: images.withdraw, color: '#10b981', text: 'Withdraw' },
-              { icon: <FontAwesome5 name="file-invoice-dollar" size={24} color="white" />, color: '#540d6e', text: 'Invoice' },
-            ].map((action, index) => (
+            {/* {icons.map((action, index) => (
               <TouchableOpacity key={index}>
                 <View style={styles.actionItem}>
                   <View style={[styles.actionIcon, { backgroundColor: action.color }]}>
@@ -48,7 +59,43 @@ const Home = () => {
                   <Text style={styles.actionText}>{action.text}</Text>
                 </View>
               </TouchableOpacity>
-            ))}
+            ))} */}
+            <TouchableOpacity style={styles.actionItem}
+            onPress={()=>setModalVisible(true)} >
+            <View style={[styles.actionIcon, {backgroundColor:"green"}]}>
+            <Image source={images.pay}
+              style={styles.actionImage}
+  
+            />
+            </View>
+            
+              <Text style={styles.actionText}>Pay</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionItem} 
+              onPress={()=>setModalVisible(true)}>
+            <View style={[styles.actionIcon, {backgroundColor:"blue"}]}><MaterialIcons name="arrow-outward" size={32} color="white" /></View>
+            
+              <Text style={styles.actionText}>Send</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionItem} 
+              onPress={()=>setModalVisible(true)}>
+            <View style={[styles.actionIcon, {backgroundColor:"green"}]}>
+            <Image source={images.withdraw}
+              style={styles.actionImage}
+  
+            />
+            </View>
+            
+              <Text style={styles.actionText}>Withdraw</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.actionItem} 
+              onPress={()=>setModalVisible(true)}>
+            <View style={[styles.actionIcon, {backgroundColor:"purple"}]}>
+            <FontAwesome5 name="file-invoice-dollar" size={24} color="white" />
+            </View>
+            
+              <Text style={styles.actionText}>Send</Text>
+            </TouchableOpacity>
           </View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} pagingEnabled style={styles.horizontalScrollView}>
             {[
