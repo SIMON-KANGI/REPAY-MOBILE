@@ -14,7 +14,7 @@ const CalculateBalance = () => {
   // Calculate the total balance and format it with commas
   const balance = useMemo(() => {
     if (!filterAccounts.length) {
-      return 'Loading...';  
+      return <Text>Loading...</Text>;  
     }
 
     const total = filterAccounts.reduce((acc, cur) => acc + cur.balance, 0);
@@ -32,9 +32,10 @@ const CalculateBalance = () => {
   }
 
   return (
-    <View>
-      <Text>{balance}</Text>
-    </View>
+  
+      <Text
+      style={{textAlign:"center", fontSize:"30px", fontWeight:'bold'}}>{balance}</Text>
+    
   );
 };
 
