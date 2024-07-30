@@ -4,8 +4,8 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 const Card = ({ image, title }) => {
   return (
     <TouchableOpacity style={styles.card} >
-      <Image source={image} style={styles.image} className="rounded-md" />
-      <Text style={styles.title} className="font-rbold">{title}</Text>
+      <Image source={image} style={styles.image} />
+      <Text style={styles.title}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     marginVertical: 5,
     alignItems: 'center',
-    borderRadius:'0.5rem'
+    
   },
   image: {
     width: 120,
